@@ -1,0 +1,153 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body{
+    background: #f4f6f9;
+    padding: 30px;
+}
+
+h1{
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 36px;
+    color: #333;
+}
+
+.container{
+    display: flex;
+    gap: 25px;
+    align-items: flex-start;
+}
+
+.form-box{
+    width: 30%;
+    background: white;
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.table-box{
+    width: 70%;
+    background: white;
+    padding: 25px;
+    border-radius: 8px;
+    min-height: 500px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+h2{
+    margin-bottom: 20px;
+    color: #444;
+    font-size: 22px;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 10px;
+}
+
+label{
+    display: block;
+    margin-top: 15px;
+    margin-bottom: 6px;
+    font-weight: bold;
+    color: #555;
+}
+
+input,
+textarea{
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    outline: none;
+    font-size: 14px;
+}
+
+input:focus,
+textarea:focus {
+    border-color: #0d88a8;
+}
+
+textarea{
+    height: 120px;
+    resize: none;
+}
+
+button{
+    width: 100%;
+    margin-top: 20px;
+    padding: 12px;
+    background: #0d88a8;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background 0.2s;
+}
+
+button:hover{
+    background: #086f89;
+}
+
+/* Table Styling */
+table{
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    margin-top: 10px;
+}
+
+th{
+    padding: 12px;
+    border-bottom: 2px solid #ddd;
+    text-align: left;
+    background-color: #f8f9fa;
+    color: #333;
+}
+
+td{
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #eee;
+    color: #555;
+    font-size: 14px;
+}
+
+/* Action Links styled as Buttons */
+.btn-edit {
+    color: #0d88a8;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 5px 10px;
+    border: 1px solid #0d88a8;
+    border-radius: 4px;
+    font-size: 13px;
+    transition: all 0.2s;
+}
+
+.btn-edit:hover {
+    background: #0d88a8;
+    color: white;
+}
+
+.btn-delete {
+    color: #e74c3c;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 5px 10px;
+    border: 1px solid #e74c3c;
+    border-radius: 4px;
+    font-size: 13px;
+    margin-left: 5px;
+    transition: all 0.2s;
+}
+
+.btn-delete:hover {
+    background: #e74c3c;
+    color: white;
+}

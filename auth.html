@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login & Sign Up</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .auth-container { max-width: 400px; margin: 100px auto; background: white; padding: 30px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        .toggle-link { text-align: center; margin-top: 15px; cursor: pointer; color: #0d88a8; }
+    </style>
+</head>
+<body>
+
+    <div class="auth-container">
+        <div id="loginSection">
+            <h2>Login</h2>
+            <form id="loginForm">
+                <label>Email</label>
+                <input type="email" id="loginEmail" placeholder="Enter Email" required>
+                <label>Password</label>
+                <input type="password" id="loginPassword" placeholder="Enter Password" required>
+                <button type="submit">Login</button>
+            </form>
+            <p class="toggle-link" onclick="toggleAuth(false)">Naya account banayein? Sign Up</p>
+        </div>
+
+        <div id="signupSection" style="display: none;">
+            <h2>Sign Up</h2>
+            <form id="signupForm">
+                <label>Name</label>
+                <input type="text" id="signupName" placeholder="Enter Name" required>
+                <label>Email</label>
+                <input type="email" id="signupEmail" placeholder="Enter Email" required>
+                <label>Password</label>
+                <input type="password" id="signupPassword" placeholder="Enter Password" required>
+                <button type="submit">Sign Up</button>
+            </form>
+            <p class="toggle-link" onclick="toggleAuth(true)">Pehle se account hai? Login</p>
+        </div>
+    </div>
+
+    <script>
+        const API_URL = 'http://localhost:3000';
+
+        function toggleAuth(showLogin) {
+            document.getElementById('loginSection').style.display = showLogin ? 'block' : 'none';
+            document.getElementById('signupSection').style.display = showLogin ? 'none' : 'block';
+        }
+
+        // SIGN UP HANDLER
+        document.getElementById('signupForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const Name = document.getElementById('signupName').value;
+            const Email = document.getElementById('signupEmail').value;
+            const Password = document.getElementById('signupPassword').value;
+
+            try {
+                const res = await fetch(`${API_URL}/sign-up`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ Name, Email, Password })
+                });
+                const data = await res.json();
+                alert(data.message);
+                if (data.success) toggleAuth(true); // Switch to login
+            } catch (err) { alert("Signup failed!"); }
+        });
+
+        // LOGIN HANDLER
+        document.getElementById('loginForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const Email = document.getElementById('loginEmail').value;
+            const Password = document.getElementById('loginPassword').value;
+
+            try {
+                const res = await fetch(`${API_URL}/login`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ Email, Password })
+                });
+                const data = await res.json();
+                
+                if (data.success) {
+                    // 1. Token ko localStorage mein save karein
+                    localStorage.setItem('token', data.token);
+                    alert("Login Successful!");
+                    // 2. Main dashboard par bhej dein
+                    window.location.href = 'index.html';
+                } else {
+                    alert(data.message);
+                }
+            } catch (err) { alert("Login failed!"); }
+        });
+    </script>
+</body>
+</html>
